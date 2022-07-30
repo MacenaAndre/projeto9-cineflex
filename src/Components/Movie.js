@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Movie({ image, id }) {
     return (
         <>
-            <Moviebox>
-                <img src={image} alt="poster"/>
-            </Moviebox>
+            <Link to={`/sessions/${id}`}>
+                <Moviebox>
+                    <img src={image} alt="poster"/>
+                </Moviebox>
+            </Link>
         </>
     );
 }
