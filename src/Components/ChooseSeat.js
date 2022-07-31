@@ -1,17 +1,20 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function ChooseSeat() {
     const { IdSession } = useParams();
-    let [sessionlist, setSessionlist] = useState({});
+    let [seatlist, setSeatlist] = useState({});
 
     useEffect(() => {
-        const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${IdMovie}/showtimes`);
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${IdSession}/seats`);
 
         promise.then( (response) => {
-            setSessionlist(response.data);
+            setSeatlist(response.data);
         });
     }, [IdSession]);
+
+    console.log(seatlist);
 
 
     return (
