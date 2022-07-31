@@ -1,8 +1,68 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import Days from "./Days";
 
 function Sessions() {
-    const { IdSession } = useParams();
-    console.log(IdSession);
+    const { IdMovie } = useParams();
+    let [sessionlist, setSessionlist] = useState({});
+
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${IdMovie}/showtimes`);
+
+        promise.then( (response) => {
+            setSessionlist(response.data);
+        });
+    }, [IdMovie]);
+
+    if(sessionlist !== {}) {
+        return (
+            <>
+                <Title>Selecione o horário</Title>
+                <Container>
+                        <Days 
+                            sessionlist={sessionlist}    
+                        />
+                </Container>
+            
+            </>
+        );
+    } else {
+        return (
+            <>
+                <Title>Selecione o horário</Title>
+                <Container>
+                </Container>
+            
+            </>
+        );
+    }
 }
 
 export default Sessions;
+
+const Title = styled.div `
+    height: 100px;
+    width: 100%;
+    font-family: 'Roboto';
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.04em;
+    color: #293845;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+`;
+
+const Container = styled.div`
+    padding: 0px 30px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+`;

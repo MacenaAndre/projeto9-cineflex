@@ -4,7 +4,7 @@ import { useEffect, useState}  from "react";
 import axios from "axios";
 
 function Movies() {
-    const [movielist, setMovielist] = useState([])
+    const [movielist, setMovielist] = useState([]);
 
     useEffect(() => {
         const promise = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies");

@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Movie({ image, id }) {
     return (
         <>
-            <Link to={`/sessions/${id}`}>
+            <Link to={`/sessoes/${id}`}>
                 <Moviebox>
                     <img src={image} alt="poster"/>
                 </Moviebox>
