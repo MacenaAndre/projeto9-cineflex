@@ -6,24 +6,23 @@ import styled from "styled-components";
 import Seats from "./Seats";
 import Form from "./Form";
 
-function ChooseSeat() {
+function ChooseSeat({ setInfos1, ids, setIds, name, setName, cpf, setCpf }) {
     const { IdSession } = useParams();
     let [seatlist, setSeatlist] = useState({});
-    let [ids, setIds] = useState([]);
-    let [name, setName] = useState("");
-    let [cpf, setCpf] = useState("");
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${IdSession}/seats`);
 
         promise.then( (response) => {
             setSeatlist(response.data);
+            setInfos1=(response.data);
         });
     }, [IdSession]);
 
     if(seatlist !== {}) {
         return (
-            <>  <Title>{`Selecione o(s) assento(s)`}</Title>
+            <>  
+                <Title>{`Selecione o(s) assento(s)`}</Title>
                 <Container>
                     <Seats 
                         seatlist={seatlist}

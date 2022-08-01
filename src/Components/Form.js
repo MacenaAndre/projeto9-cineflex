@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Form({ ids, name, setName, cpf, setCpf }) {
@@ -31,7 +31,7 @@ function Form({ ids, name, setName, cpf, setCpf }) {
         }
         const promise = axios.post('https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many', newobj);
 
-        promise.then((resp) => (console.log('olá')));
+        promise.then((resp) => (console.log('Enviado')));
         promise.catch((resp) => alert("Eroo ao enviar"));
     }
     return (
@@ -53,7 +53,9 @@ function Form({ ids, name, setName, cpf, setCpf }) {
                     required
                 />
                 <div>
-                    <button>{`Reservar assento(s)`}</button>
+                    <Link to="/sucesso">
+                        <button>{`Reservar assento(s)`}</button>
+                    </Link>
                 </div>
             </form>
         </FormBox>
@@ -102,6 +104,7 @@ const FormBox = styled.div`
         letter-spacing: 0.04em;
         text-align: center;
         color: #ffffff;
+        cursor: pointer;
     }
     
     & div {
