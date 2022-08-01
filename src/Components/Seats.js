@@ -1,7 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Seat from "./Seat";
 
 function Seats({ seatlist }) {
+    
+    const [list, setList] = useState([]);
+
     if(seatlist.movie !== undefined) {
         return (
             <SeatBox>
@@ -11,6 +15,8 @@ function Seats({ seatlist }) {
                         name={value.name}
                         id={value.id}
                         isAvailable={value.isAvailable}
+                        list={list}
+                        setList={setList}
                     />
                 ))}
                 <InfoBar>

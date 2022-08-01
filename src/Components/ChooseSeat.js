@@ -4,10 +4,16 @@ import { useParams } from "react-router-dom";
 import Footer2 from "./Footer2";
 import styled from "styled-components";
 import Seats from "./Seats";
+import Form from "./Form";
 
 function ChooseSeat() {
     const { IdSession } = useParams();
     let [seatlist, setSeatlist] = useState({});
+    let [apiobj, setApiobjt] = useState({
+        ids: [],
+        name: "",
+        cpf: ""
+    });
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${IdSession}/seats`);
@@ -23,6 +29,12 @@ function ChooseSeat() {
                 <Container>
                     <Seats 
                         seatlist={seatlist}
+                    />
+                    <Form 
+                        apiobj={apiobj}
+                        setApiobjt={setApiobjt}
+                        name={apiobj.name}
+                        cpf={apiobj.cpf}
                     />
                 </Container>
                 <Footer2 
