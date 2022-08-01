@@ -1,19 +1,26 @@
 import styled from "styled-components";
 
-function Footer({ image, title }) {
-
+function Footer2({ seatlist }) {
+console.log(seatlist);
+    if(seatlist.movie !== undefined) {
         return (
             <Wrapper>
                 <div>
-                    <img src={image} alt="poster"></img>
+                    <img src={seatlist.movie.posterURL} alt="poster"></img>
                 </div>
-                <h1>{title}</h1>
+                <ul>
+                    <li>{seatlist.movie.title}</li>
+                    <li>{seatlist.day.weekday} {seatlist.name}</li>
+                </ul>
             </Wrapper>
         );
+    } else {
+        return (<></>);
+    }
     
 }
-    
-export default Footer;
+
+export default Footer2;
 
 const Wrapper = styled.div`
     padding-bottom: 12px;
@@ -42,7 +49,7 @@ const Wrapper = styled.div`
             width: 90%;
         }
 
-    & h1 {
+    & ul {
         color: #293845;
         font-family: 'Roboto';
         font-size: 26px;

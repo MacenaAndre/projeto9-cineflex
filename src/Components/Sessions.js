@@ -5,11 +5,9 @@ import styled from "styled-components";
 import Days from "./Days";
 import Footer from "./Footer";
 
-function Sessions() {
+function Sessions( {foottype, setFoottype} ) {
     const { IdMovie } = useParams();
     let [sessionlist, setSessionlist] = useState({});
-    let [date, setDate] = useState("");
-    let [weekday, setWeekday] = useState("");
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${IdMovie}/showtimes`);
@@ -25,9 +23,7 @@ function Sessions() {
                 <Title>Selecione o horário</Title>
                 <Container>
                         <Days 
-                            sessionlist={sessionlist}
-                            setImage={setWeekday}
-                            setTitle={setDate}    
+                            sessionlist={sessionlist} 
                         />
                 </Container>
                 <Footer 

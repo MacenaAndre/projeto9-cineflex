@@ -1,4 +1,3 @@
-import { unstable_batchedUpdates } from "react-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 

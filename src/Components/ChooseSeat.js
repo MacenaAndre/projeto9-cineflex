@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Footer2 from "./Footer2";
+import styled from "styled-components";
+import Seats from "./Seats";
 
 function ChooseSeat() {
     const { IdSession } = useParams();
@@ -14,14 +17,50 @@ function ChooseSeat() {
         });
     }, [IdSession]);
 
-    console.log(seatlist);
-
-
-    return (
-        <>
-            <div>ola</div>
-        </>
-    );
+    if(seatlist !== {}) {
+        return (
+            <>  <Title>{`Selecione o(s) assento(s)`}</Title>
+                <Container>
+                    <Seats 
+                        seatlist={seatlist}
+                    />
+                </Container>
+                <Footer2 
+                    seatlist={seatlist}
+                />
+            </>
+        );
+    } else {
+        return (
+            <></>
+        );
+    }
+    
 }
 
 export default ChooseSeat;
+
+const Title = styled.div `
+    height: 100px;
+    width: 100%;
+    font-family: 'Roboto';
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.04em;
+    color: #293845;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+`;
+
+const Container = styled.div`
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+`;

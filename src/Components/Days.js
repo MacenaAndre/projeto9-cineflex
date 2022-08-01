@@ -3,7 +3,7 @@ import Showtimes from "./Showtimes";
 
 function Days({ sessionlist }) {
     let days = sessionlist.days;
-    console.log(sessionlist);
+    
     if(days !== undefined) {
         return (
         
