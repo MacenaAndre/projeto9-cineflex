@@ -3,28 +3,30 @@ import styled from "styled-components";
 
 
  
-function Seat({ name, id, isAvailable, list, setList }) {
+function Seat({ name, id, isAvailable, list, setList, ids, setIds }) {
 
     let [clicked, setClicked] = useState(false);
     
     function getInfo(name, list, setList) {
-
-        let newlist = [];
+        
+            let newlist = [];
+            let idlist = [];
 
         if(clicked === false) {
             newlist = [...list, name]
+            idlist = [...ids, id];
             setList(newlist);
+            setIds(idlist);
             setClicked(!clicked);
         }
         if(clicked === true) {
             newlist = list.filter((value) => ( value !== name ));
             setList(newlist);
             setClicked(!clicked);
+            idlist = ids.filter((value) => (value !== id))
+            setIds(idlist);
         }
-    }
-    
-    console.log(list);
-    console.log(clicked)
+        }
     
     if(name <= 9 && isAvailable === true && clicked === true) {
         return (

@@ -1,35 +1,55 @@
+import axios from "axios";
+import { useEffect } from "react";
 import styled from "styled-components";
 
-function Form({ apiobj, setApiobj, name, cpf }) {
+function Form({ ids, name, setName, cpf, setCpf }) {
 
-    function SendApi(e) {
+    function sendApi(e) {
+
         e.preventDefault();
 
+        const newobj = {
+            ids: ids,
+            name: name,
+            cpf: cpf
+        }
+        let bolean = false;
+
+        if(newobj.ids.length < 1) {
+            alert("Selecione pelo menos um assento");
+        }
+        if(newobj.cpf.length < 11) {
+            alert("digite um CPF válido")
+        }
+        for(let i = 0; i < newobj.cpf.length; i++) {
+            if(isNaN(newobj.cpf[i])) {
+                bolean = true;
+            }
+        }
+        if(bolean === true) {
+            alert("Digite um CPF válido");
+        }
+        const promise = axios.post('https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many', newobj);
+
+        promise.then((resp) => (console.log('olá')));
+        promise.catch((resp) => alert("Eroo ao enviar"));
     }
     return (
         <>
         <FormBox>
-            <form onSubmit={SendApi}>    
+            <form onSubmit={sendApi}>    
                 <label>Nome do comprador</label>
                 <input
                     type="text"
-                    onChange={(e) => setApiobj({
-                       ids: [],
-                       name: e.target.value,
-                       cpf: cpf
-                    })}
-                    value={apiobj.name}
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
                     required
                 />
                 <label>CPF do comprador</label>
                 <input
                     type="text"
-                    onChange={(e) => setApiobj({
-                        ids: [],
-                        name: name,
-                        cpf: e.target.value
-                     })}
-                    value={apiobj.cpf}
+                    onChange={(e) => setCpf(e.target.value)}
+                    value={cpf}
                     required
                 />
                 <div>

@@ -9,11 +9,9 @@ import Form from "./Form";
 function ChooseSeat() {
     const { IdSession } = useParams();
     let [seatlist, setSeatlist] = useState({});
-    let [apiobj, setApiobjt] = useState({
-        ids: [],
-        name: "",
-        cpf: ""
-    });
+    let [ids, setIds] = useState([]);
+    let [name, setName] = useState("");
+    let [cpf, setCpf] = useState("");
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${IdSession}/seats`);
@@ -29,12 +27,15 @@ function ChooseSeat() {
                 <Container>
                     <Seats 
                         seatlist={seatlist}
+                        ids={ids}
+                        setIds={setIds}
                     />
                     <Form 
-                        apiobj={apiobj}
-                        setApiobjt={setApiobjt}
-                        name={apiobj.name}
-                        cpf={apiobj.cpf}
+                        name={name}
+                        setName={setName}
+                        cpf={cpf}
+                        setCpf={setCpf}
+                        ids={ids}
                     />
                 </Container>
                 <Footer2 

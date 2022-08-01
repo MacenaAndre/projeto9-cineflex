@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Seat from "./Seat";
 
-function Seats({ seatlist }) {
+function Seats({ seatlist, ids, setIds }) {
     
     const [list, setList] = useState([]);
 
@@ -17,6 +17,8 @@ function Seats({ seatlist }) {
                         isAvailable={value.isAvailable}
                         list={list}
                         setList={setList}
+                        ids={ids}
+                        setIds={setIds}
                     />
                 ))}
                 <InfoBar>
